@@ -33,3 +33,11 @@ top_product_reviews = top_product_reviews.sort('predicted_sentiment', ascending=
 top_product_reviews.head()
 top_product_reviews[0]['review']
 top_product_reviews[-1]['review']
+
+# function for counting key word
+def awesome_count(dict):
+    if 'awesome' in dict:
+        return 1
+    else:
+        return 0
+
