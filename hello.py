@@ -68,3 +68,9 @@ selected_words_model = selected_words_model['coefficients'].sort('value')
 
 # print them
 selected_words_model.print_rows(num_rows=12)
+
+# evaluate model
+selected_words_model.evaluate(test_data, metric='roc_curve')
+
+selected_words_model.show(view='Evaluation')
+
