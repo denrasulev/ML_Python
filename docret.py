@@ -85,3 +85,49 @@ gl.distances.cosine(elton['tfidf'][0], victoria['tfidf'][0])
 
 paul = people[people['name'] == 'Paul McCartney']
 gl.distances.cosine(elton['tfidf'][0],paul['tfidf'][0])
+
+# nearest neighbor to John
+
+knn_model_john = gl.nearest_neighbors.create(people,features=['word_count'],label='name')
+knn_model_john.query(elton)
+
+joel = people[people['name'] == 'Billy Joel']
+richard = people[people['name'] == 'Cliff Richard']
+daltrey = people[people['name'] == 'Roger Daltrey']
+bush = people[people['name'] == 'George Bush']
+
+print gl.distances.cosine(elton['word_count'][0],joel['word_count'][0])
+print gl.distances.cosine(elton['word_count'][0],richard['word_count'][0])
+print gl.distances.cosine(elton['word_count'][0],daltrey['word_count'][0])
+print gl.distances.cosine(elton['word_count'][0],bush['word_count'][0])  # empty
+
+# nearest neighbor using tf-idf
+
+knn_model.query(elton)
+knn_model_john.query(elton)
+
+# nearest neighbor to Victoria
+
+stephen = people[people['name'] == 'Stephen Dow Beckham']
+louis = people[people['name'] == 'Louis Molloy']
+adrienne = people[people['name'] == 'Adrienne Corri']
+mary = people[people['name'] == 'Mary Fitzgerald (artist)']
+
+print gl.distances.cosine(victoria['word_count'][0],stephen['word_count'][0])
+print gl.distances.cosine(victoria['word_count'][0],louis['word_count'][0])
+print gl.distances.cosine(victoria['word_count'][0],adrienne['word_count'][0])
+print gl.distances.cosine(victoria['word_count'][0],mary['word_count'][0])
+
+# nearest neighbor to Victoria using tf-idf
+
+knn_model.query(victoria)
+
+melb = people[people['name'] == 'Mel B']
+caroline = people[people['name'] == 'Caroline Rush']
+david = people[people['name'] == 'David Beckham']
+carrie = people[people['name'] == 'Carrie Reichardt']
+
+gl.distances.cosine(victoria['tfidf'][0],melb['tfidf'][0])
+gl.distances.cosine(victoria['tfidf'][0],caroline['tfidf'][0])
+gl.distances.cosine(victoria['tfidf'][0],david['tfidf'][0])
+gl.distances.cosine(victoria['tfidf'][0],carrie['tfidf'][0])
