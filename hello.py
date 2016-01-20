@@ -74,3 +74,26 @@ selected_words_model.evaluate(test_data, metric='roc_curve')
 
 selected_words_model.show(view='Evaluation')
 
+# check solution
+
+diaper_champ_reviews = products[products['name'] == 'Baby Trend Diaper Champ']
+
+len(diaper_champ_reviews)
+
+diaper_champ_reviews['rating'].show(view='Categorical')
+
+diaper_champ_reviews['predicted_sentiment'] = sentiment_model.predict(diaper_champ_reviews, output_type='probability')
+
+diaper_champ_reviews = diaper_champ_reviews.sort('predicted_sentiment', ascending=False)
+
+diaper_champ_reviews.head()
+
+diaper_champ_reviews['predicted_sentiment'] = selected_words_model.predict(diaper_champ_reviews, output_type='probability')
+
+diaper_champ_reviews = diaper_champ_reviews.sort('review', ascending=True)
+
+selected_words_model.predict(diaper_champ_reviews[0:1], output_type='probability')
+
+diaper_champ_reviews[(diaper_champ_reviews['review'].contains('Baby Luke'))]
+
+# eof
