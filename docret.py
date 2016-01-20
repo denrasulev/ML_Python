@@ -46,3 +46,42 @@ beckham = people[people['name'] == 'David Beckham']
 gl.distances.cosine(obama['tfidf'][0], clinton['tfidf'][0])
 gl.distances.cosine(obama['tfidf'][0], beckham['tfidf'][0])
 
+# nearest neighbor model
+
+knn_model = gl.nearest_neighbors.create(people,label='name',features=['tfidf'])
+
+# apply model
+
+knn_model.query(obama)
+
+# other people
+
+swift = people[people['name'] == 'Taylor Swift']
+
+knn_model.query(swift)
+
+# Assignment
+
+elton = people[people['name'] == 'Elton John']
+
+elton['word_count'] = gl.text_analytics.count_words(elton['text'])
+
+elton_wc = elton[['word_count']].stack('word_count', new_column_name = ['word','count'])
+
+print(elton_wc.sort('count',ascending=False).head())
+
+# top tf-idf words for Elton John
+
+elton[['tfidf']].stack('tfidf', new_column_name=['word','tfidf']).sort('tfidf', ascending=False)
+
+# cosine distance between Elton and Victoria
+
+victoria = people[people['name'] == 'Victoria Beckham']
+victoria[['tfidf']].stack('tfidf', new_column_name=['word','tfidf']).sort('tfidf', ascending=False)
+
+gl.distances.cosine(elton['tfidf'][0], victoria['tfidf'][0])
+
+# cosine distance between Elton and Paul
+
+paul = people[people['name'] == 'Paul McCartney']
+gl.distances.cosine(elton['tfidf'][0],paul['tfidf'][0])
