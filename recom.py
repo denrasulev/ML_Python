@@ -57,3 +57,5 @@ subset_test_users = test_data['user_id'].unique()[0:10000]
 recommendation = personalised_model.recommend(subset_test_users,k=1)
 grouped = recommendation.groupby(key_columns='song', operations={'count': gl.aggregate.COUNT()})
 grouped.sort('count', ascending=False)
+
+# eof
