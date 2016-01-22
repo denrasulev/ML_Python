@@ -49,6 +49,11 @@ len(song_data[song_data['artist'] == 'Lady GaGa']['user_id'].unique())
 
 # most and least popular artist
 aggregated = song_data.groupby(key_columns='artist', operations={'total_count': gl.aggregate.SUM('listen_count')})
-aggregated.sort('total_count', ascending=False)
-aggregated.sort('total_count')
+aggregated.sort('total_count', ascending=False) # most popular
+aggregated.sort('total_count')                  # least popular
 
+# most recommended song
+subset_test_users = test_data['user_id'].unique()[0:10000]
+recommendation = personalised_model.recommend(subset_test_users,k=1)
+grouped = recommendation.groupby(key_columns='song', operations={'count': gl.aggregate.COUNT()})
+grouped.sort('count', ascending=False)
