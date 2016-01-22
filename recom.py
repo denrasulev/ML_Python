@@ -38,3 +38,7 @@ personalised_model.recommend(users=[users[1]])
 personalised_model.recommend(users=[users[1000]])
 personalised_model.get_similar_items(['With Or Without You - U2'])
 
+# recommender models comparison
+
+%matplotlib inline
+model_performance = gl.recommender.util.compare_models(test_data,[popularity_model,personalised_model],user_sample=0.05)
